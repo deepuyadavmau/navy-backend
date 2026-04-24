@@ -9,8 +9,9 @@ const rateLimit = require("express-rate-limit");
 const { OAuth2Client } = require('google-auth-library');
 const nodemailer = require("nodemailer");
 const admin = require("firebase-admin");
-const serviceAccount = require('./firebase-key.json');
-
+const serviceAccount = process.env.FIREBASE_KEY_JSON 
+  ? JSON.parse(process.env.FIREBASE_KEY_JSON) 
+  : require("./firebase-key.json");
 // Initialize Firebase Admin
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
