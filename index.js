@@ -27,7 +27,10 @@ app.use(express.json({ limit: '10mb' })); // Limit payload size
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Security Headers (Helmet)
-app.use(helmet());
+app.use(helmet({
+  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 
 // CORS Configuration
 const allowedOrigins = [
@@ -36,6 +39,7 @@ const allowedOrigins = [
   "http://localhost:5000",
   "https://localhost:5173",
   "https://localhost:3000",
+  "https://navy-backend-production.up.railway.app",
   // DevTunnel URLs (development)
   /\.inc1\.devtunnels\.ms$/,
 ];
